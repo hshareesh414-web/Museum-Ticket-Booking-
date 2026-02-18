@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Search Museums - Museum Ticket Booking</title>
+<title>Museum Ticket Booking</title>
 
 <style>
 
@@ -18,7 +18,6 @@ body{
   color:#222;
 }
 
-
 header{
   background: linear-gradient(90deg,#3b2308,#5a3410);
   padding:30px 10px;
@@ -31,7 +30,6 @@ header h1{
   letter-spacing:1px;
 }
 
-/* ================== TOP SECTION (BACK BUTTON + SEARCH) ================== */
 .top-section{
   display:flex;
   align-items:center;
@@ -41,7 +39,6 @@ header h1{
   margin:0 auto;
 }
 
-/* ================== BACK BUTTON ================== */
 .back-button{
   padding:15px 30px;
   display:inline-flex;
@@ -72,7 +69,6 @@ header h1{
   font-weight:bold;
 }
 
-/* ================== SEARCH CONTAINER ================== */
 .search-container{
   flex:1;
   position:relative;
@@ -130,7 +126,6 @@ header h1{
   filter:brightness(0) invert(1);
 }
 
-/* ================== SUGGESTIONS BOX ================== */
 .suggestions-box{
   position:absolute;
   top:calc(100% + 10px);
@@ -189,7 +184,6 @@ header h1{
   font-size:16px;
 }
 
-/* ================== RESULTS HEADER ================== */
 .results-header{
   text-align:center;
   padding:40px 20px 20px;
@@ -227,7 +221,6 @@ header h1{
   display:none;
 }
 
-/* ================== CARD ================== */
 .card{
   background:#fff;
   border-radius:14px;
@@ -285,7 +278,6 @@ header h1{
   background:#b64f4f;
 }
 
-/* ================== RESPONSIVE ================== */
 @media(max-width:768px){
   header h1{font-size:24px;}
   .top-section{
@@ -341,7 +333,6 @@ nav button{
 <body>
 
 
-
 <div class="top-section">
   <a href="index.html" class="back-button"></a>
   
@@ -349,6 +340,174 @@ nav button{
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Search museums by name, city, or category..." autofocus>
       <button class="search-btn" id="searchBtn">
+        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
+        
+      </button>
+      <div class="suggestions-box" id="suggestionsBox"></div>
+    </div>
+  </div>
+</div>
+
+<div class="results-header hidden" id="resultsHeader">
+  <h2 id="resultsTitle"></h2>
+  <p id="resultsCount"></p>
+</div>
+
+<div class="results-grid hidden" id="resultsGrid"></div>
+
+<script>
+  let allMuseums = [];
+  try {
+    const storedMuseums = localStorage.getItem('allMuseums');
+    if (storedMuseums) {
+      allMuseums = JSON.parse(storedMuseums);
+    }
+  } catch (e) {
+    console.error('Error loading museum data:', e);
+  }
+
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const suggestionsBox = document.getElementById('suggestionsBox');
+  const resultsHeader = document.getElementById('resultsHeader');
+  const resultsTitle = document.getElementById('resultsTitle');
+  const resultsCount = document.getElementById('resultsCount');
+  const resultsGrid = document.getElementById('resultsGrid');
+
+  const prefilledQuery = localStorage.getItem('searchQuery');
+  if (prefilledQuery) {
+    searchInput.value = prefilledQuery;
+    performSearch(prefilledQuery);
+    localStorage.removeItem('searchQuery');
+  }
+
+  searchInput.addEventListener('input', showSuggestions);
+
+  function showSuggestions() {
+    const query = searchInput.value.trim().toLowerCase();
+    suggestionsBox.innerHTML = '';
+
+    if (query === '') {
+      suggestionsBox.style.display = 'none';
+      return;
+    }
+
+    const matches = allMuseums.filter(museum => {
+      const name = museum.name.toLowerCase();
+      const city = museum.city.toLowerCase();
+      const category = museum.category.toLowerCase();
+      return name.includes(query) || city.includes(query) || category.includes(query);
+    });
+
+    if (matches.length === 0) {
+      suggestionsBox.innerHTML = '<div class="no-results">No museums found</div>';
+      suggestionsBox.style.display = 'block';
+      return;
+    }
+
+    matches.slice(0, 5).forEach(museum => {
+      const item = document.createElement('div');
+      item.className = 'suggestion-item';
+      item.innerHTML = `
+        <img src="${museum.img}" alt="${museum.name}">
+        <div class="suggestion-info">
+          <h4>${museum.name}</h4>
+          <p>${museum.city} • ${museum.category}</p>
+        </div>
+      `;
+      
+      item.addEventListener('click', () => {
+        searchInput.value = museum.name;
+        suggestionsBox.style.display = 'none';
+        performSearch(museum.name);
+      });
+      
+      suggestionsBox.appendChild(item);
+    });
+
+    suggestionsBox.style.display = 'block';
+  }
+
+  searchBtn.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      performSearch(query);
+    }
+  });
+
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim();
+      if (query) {
+        performSearch(query);
+      }
+    }
+  });
+
+  function performSearch(query) {
+    const queryLower = query.toLowerCase();
+    suggestionsBox.style.display = 'none';
+
+    const results = allMuseums.filter(museum => {
+      const name = museum.name.toLowerCase();
+      const city = museum.city.toLowerCase();
+      const category = museum.category.toLowerCase();
+      return name.includes(queryLower) || city.includes(queryLower) || category.includes(queryLower);
+    });
+
+    displayResults(results, query);
+  }
+
+  function displayResults(results, query) {
+    resultsGrid.innerHTML = '';
+
+    if (results.length === 0) {
+      resultsTitle.textContent = 'No Results Found';
+      resultsCount.textContent = `No museums found for "${query}"`;
+      resultsHeader.classList.remove('hidden');
+      resultsGrid.classList.add('hidden');
+      return;
+    }
+
+    resultsTitle.textContent = `Search Results for "${query}"`;
+    resultsCount.textContent = `Found ${results.length} museum${results.length === 1 ? '' : 's'}`;
+    resultsHeader.classList.remove('hidden');
+    resultsGrid.classList.remove('hidden');
+
+    results.forEach(museum => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${museum.img}" alt="${museum.name}">
+        <div class="info">
+          <h3>${museum.name}</h3>
+          <div class="location">📍 ${museum.city}</div>
+          <span class="category">${museum.category}</span>
+          <button onclick="bookMuseum('${museum.name}', '${museum.city}', '${museum.category}', '${museum.img}')">BOOK NOW</button>
+        </div>
+      `;
+      resultsGrid.appendChild(card);
+    });
+
+    resultsHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function bookMuseum(name, city, category, img) {
+    localStorage.setItem("bookingDetails", JSON.stringify({
+      name, city, category, img
+    }));
+    alert(`Booking: ${name}\nCity: ${city}\nCategory: ${category}\n\nBooking page coming soon!`);
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+      suggestionsBox.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>        <button class="search-btn" id="searchBtn">
         <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
         
       </button>

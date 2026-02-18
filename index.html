@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Museum Ticket Booking</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+body{
+  font-family: "Poppins", Arial, sans-serif;
+  background: white;
+  margin:0;
+  padding:0;
+  color:#222;
+}
+
+
+header{
+  background: linear-gradient(90deg,#3b2308,#5a3410);
+  padding:30px 10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+header h1{
+  color:#fff;
+  margin:0;
+  font-size:32px;
+  letter-spacing:1px;
+}
+
+
+nav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  padding:15px;
+  flex-wrap:wrap;
+}
+nav button{
+  padding:10px 22px;
+  font-size:15px;
+  border:none;
+  border-radius:30px;
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:all .3s ease;
+}
+nav button:hover{
+  background:black;
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+.search-icon-btn{
+  background:#fff;
+  border:2px solid white;
+  border-radius:50%;
+  width:45px;
+  height:45px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.search-icon-btn:hover{
+  background:#d46a6a;
+  transform:scale(1.1);
+}
+
+.search-icon-btn img{
+  width:22px;
+  height:22px;
+  filter:invert(35%) sepia(12%) saturate(2234%) hue-rotate(313deg) brightness(91%) contrast(88%);
+}
+
+.search-icon-btn:hover img{
+  filter:brightness(0) invert(1);
+}
+
+
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:35px 30px 10px;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.section-title{
+  text-align:left;
+  font-size:22px;
+  font-weight:700;
+  color:#2c2c2c;
+  position:relative;
+  margin:0;
+}
+.section-title::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:60px;
+  height:4px;
+  background:#d46a6a;
+  border-radius:4px;
+}
+
+.see-all-btn{
+  padding:8px 20px;
+  border:2px solid #d46a6a;
+  background:transparent;
+  color:#d46a6a;
+  border-radius:25px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s ease;
+  font-size:14px;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.see-all-btn:hover{
+  background:#d46a6a;
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+
+.carousel-wrapper{
+  position:relative;
+  width:100%;
+  margin:20px 0;
+}
+
+.carousel-container{
+  width:95%;
+  margin:15px auto;
+  overflow:hidden;
+  border-radius:20px;
+  background:white;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  cursor:grab;
+  position:relative;
+}
+.carousel-container:active{
+  cursor:grabbing;
+}
+.carousel-track{
+  display:flex;
+}
+.carousel-track img{
+  width:360px;
+  height:280px;
+  object-fit:cover;
+  margin:5px;
+  border-radius:14px;
+  user-select:none;
+  pointer-events:none;
+}
+
+
+.scrollable-wrapper{
+  position:relative;
+  width:100%;
+  margin:20px 0;
+}
+
+.scroll-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(212,106,106,0.9);
+  color:#fff;
+  border:none;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+
+.scroll-btn:hover{
+  background:#b64f4f;
+  transform:translateY(-50%) scale(1.1);
+}
+
+.scroll-btn.left{
+  left:10px;
+}
+
+.scroll-btn.right{
+  right:10px;
+}
+
+
+.image{
+  display:flex;
+  gap:25px;
+  padding:20px 30px;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+}
+.image::-webkit-scrollbar{
+  height:8px;
+}
+.image::-webkit-scrollbar-thumb{
+  background:#d46a6a;
+  border-radius:10px;
+}
+.image::-webkit-scrollbar-track{
+  background:#f0f0f0;
+  border-radius:10px;
+}
+
+
+.card{
+  height:500px;
+  width:360px;
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+  transition:all .35s ease;
+  flex-shrink:0;
+  cursor:pointer;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+.card img{
+  width:400px;
+  height:390px;
+  object-fit:cover;
+  pointer-events:none;
+}
+.info{
+  padding:12px;
+}
+.info h3{
+  font-size:16px;
+  margin:5px 0;
+}
+.info button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  background:#d46a6a;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+.info button:hover{
+  background:#b64f4f;
+}
+
+
+.category-card{
+  min-width:200px;
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+  transition:all .35s ease;
+  flex-shrink:0;
+  cursor:pointer;
+}
+
+.category-card:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+
+.category-card img{
+  width:200px;
+  height:160px;
+  object-fit:cover;
+}
+
+.category-info{
+  padding:15px;
+  text-align:center;
+  background:linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.category-info h3{
+  font-size:18px;
+  margin:0;
+  color:#2c2c2c;
+  font-weight:700;
+}
+
+footer {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+  padding:40px 20px 20px;
+  text-align: center;
+  margin-top:50px;
+}
+
+.footer-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+  flex-wrap:wrap;
+}
+
+.social-icon{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s ease;
+}
+
+.social-icon:hover{
+  background:rgba(255,255,255,0.2);
+  transform:translateY(-5px);
+}
+
+.social-icon img{
+  width:24px;
+  height:24px;
+  filter:brightness(0) invert(1);
+}
+
+.copyright{
+  font-size:14px;
+  line-height:1.6;
+  color:rgba(255,255,255,0.7);
+  max-width:800px;
+  margin:0 auto;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+
+@media(max-width:768px){
+  .carousel-track img{width:280px; height:220px;}
+  .image{padding:15px;}
+  header h1{font-size:24px;}
+  .scroll-btn{width:35px; height:35px; font-size:16px;}
+  .section-header{margin:25px 15px 10px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <center><h1>Museum Ticket Booking</h1></center>
+</header>
+
+<nav>
+  <button>Home</button>
+  <button>Offers</button>
+  <button>Exhibitions</button>
+  <button>Profile</button>
+  <button class="search-icon-btn" onclick="window.location.href='search.html'">
+    <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
+  </button>
+</nav>
+
+<!-- POPULAR MUSEUMS CAROUSEL -->
+<div class="section-header">
+  <h2 class="section-title">Popular Museums</h2>
+</div>
+<div class="carousel-wrapper">
+  <button class="scroll-btn left" id="scrollLeftPop">‹</button>
+  <button class="scroll-btn right" id="scrollRightPop">›</button>
+  <div class="carousel-container" id="carouselBox1">
+    <div class="carousel-track" id="carousel1">
+      <img src="https://www.american-rails.com/images/82582096820947006.jpg" alt="steam locomotive">
+      <img src="https://holidify.com/images/attr_wiki/compressed/attr_wiki_2053.jpg" alt="HIL">
+      <img src="https://londonwithlittles.com/wp-content/uploads/2025/02/London-With-Littles-Grant-Museum-of-Zoology-dolphin.jpg" alt="Zoology Museum, Karnatak Science College ">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/0d/d1/0d/exhibits.jpg?w=1200&h=1200&s=1" alt="Legends Motorcycle Museum">
+      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
+      <img src="https://www.american-rails.com/images/82582096820947006.jpg" alt="steam locomotive">
+      <img src="https://holidify.com/images/attr_wiki/compressed/attr_wiki_2053.jpg" alt="Museum HIL">
+	   <img src="https://londonwithlittles.com/wp-content/uploads/2025/02/London-With-Littles-Grant-Museum-of-Zoology-dolphin.jpg" alt="Zoology Museum, Karnatak Science College">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/0d/d1/0d/exhibits.jpg?w=1200&h=1200&s=1https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=400" alt="Legends Motorcycle Museum">
+      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
+    </div>
+  </div>
+</div>
+
+
+<div class="section-header">
+  <h2 class="section-title">Recommended Museums</h2>
+  <a href="recommended.html" class="see-all-btn">See All</a>
+</div>
+<div class="scrollable-wrapper">
+  
+  <section class="image" id="recommendedSection">
+    <div class="card" data-name="Steam Locomotive" data-city="Bangalore" data-category="Science">  
+      <img src="https://images.squarespace-cdn.com/content/v1/5eb222ea05a31d0b0036ad28/1596072077951-WPFT99SF82OG9QJTNGG2/Stockton+Terminal+%26+Eastern+Railroad+Steam+Locomotive+No+1.jpg" alt="Steam Locomotive">  
+      <div class="info">  
+        <h3>Steam Locomotive</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="HAL heritage and Aerospace Museum" data-city="Bangalore" data-category="Aerospace">  
+      <img src="https://media-cdn.sygictraveldata.com/media/800x600/612664395a40232133447d33247d38313330363538" alt="HIL">  
+      <div class="info">  
+        <h3>HAL heritage and Aerospace Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Madras Sappers Museum & Archives" data-city="Bengaluru" data-category="Military">  
+      <img src="https://shop.museumsofindia.org/sites/default/files/2017-11/sappers-1.jpg" alt="Madras Sappers Museum & Archives">  
+      <div class="info">  
+        <h3>Madras Sappers Museum & Archives</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div>
+    <div class="card" data-name="NIMHANS Brain Museum" data-city="Bengaluru" data-category="Anatomical">  
+      <img src="https://nimhansalumni.in/wp-content/uploads/2024/03/image14-57.jpeg" alt="NIMHANS Brain Museum">  
+      <div class="info">  
+        <h3>NIMHANS Brain Museum</h3>   
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Law Museum" data-city="Bengaluru" data-category="Law">  
+      <img src="https://shop.museumsofindia.org/sites/default/files/2017-08/government-1.JPG" alt="Law Museum">  
+      <div class="info">  
+        <h3>Law Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+
+    <div class="card" data-name="Philatelic Museum" data-city="Delhi" data-category="Philatelic">  
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/India_1947_Ashoka_Lions_1_and_half_annas.jpg" alt="Philatelic Museum">  
+      <div class="info">  
+        <h3>Philatelic Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Kempegowda Museum" data-city="Bangalore" data-category="Heritage center">  
+      <img src="https://im.whatshot.in/img/2021/Sep/1-0-cropped-1633005698.jpg" alt="Kempegowda Museum">  
+      <div class="info">  
+        <h3>Kempegowda Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Zoology Museum, Karnatak Science College" data-city="Dharwad" data-category="Zoology">  
+      <img src="https://media-cdn.tripadvisor.com/media/photo-s/17/49/e5/7c/img-20190425-121838452.jpg" alt="Zoology Museum, Karnatak Science College">  
+      <div class="info">  
+        <h3>Zoology Museum, Karnatak Science College</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Government Museum" data-city="Bangalore" data-category="Archaeological">  
+      <img src="https://www.fabhotels.com/blog/wp-content/uploads/2020/10/4.-Venkatappa-Art-Gallery-Bangalore_1393722098-.jpg" alt="Government Museum">  
+      <div class="info">  
+        <h3>Government Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	
+  </section>
+</div>
+
+<div class="section-header">
+  <h2 class="section-title">Weekend Best Museum Events </h2>
+</div>
+<section class="image" id="categorySection">
+  <div class="category-card" data-category="Art" onclick="filterByCategory('Art')">
+    <img src="https://images.unsplash.com/photo-1578926078830-57e8d2ef9b3f?w=300" alt="Art Museums">
+    <div class="category-info">
+      <h3>Art Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="History" onclick="filterByCategory('History')">
+    <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="History Museums">
+    <div class="category-info">
+      <h3>History Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Science" onclick="filterByCategory('Science')">
+    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300" alt="Science Museums">
+    <div class="category-info">
+      <h3>Science Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Archaeology" onclick="filterByCategory('Archaeology')">
+    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Archaeology Museums">
+    <div class="category-info">
+      <h3>Archaeology</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Natural History" onclick="filterByCategory('Natural History')">
+    <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=300" alt="Natural History Museums">
+    <div class="category-info">
+      <h3>Natural History</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Transportation" onclick="filterByCategory('Transportation')">
+    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=300" alt="Transportation Museums">
+    <div class="category-info">
+      <h3>Transportation</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Aerospace" onclick="filterByCategory('Aerospace')">
+    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300" alt="Aerospace Museums">
+    <div class="category-info">
+      <h3>Aerospace</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Modern Art" onclick="filterByCategory('Modern Art')">
+    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300" alt="Modern Art Museums">
+    <div class="category-info">
+      <h3>Modern Art</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Cultural Heritage" onclick="filterByCategory('Cultural Heritage')">
+    <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Cultural Heritage Museums">
+    <div class="category-info">
+      <h3>Cultural Heritage</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Maritime" onclick="filterByCategory('Maritime')">
+    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Maritime Museums">
+    <div class="category-info">
+      <h3>Maritime</h3>
+    </div>
+  </div>
+</section>
+
+
+
+
+<div class="section-header">
+  <h2 class="section-title">Browse By Category </h2>
+</div>
+<section class="image" id="categorySection2">
+  <div class="category-card" data-category="Art" onclick="filterByCategory('Art')">
+    <img src="https://images.unsplash.com/photo-1578926078830-57e8d2ef9b3f?w=300" alt="Art Museums">
+    <div class="category-info">
+      <h3>Art Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="History" onclick="filterByCategory('History')">
+    <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="History Museums">
+    <div class="category-info">
+      <h3>History Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Science" onclick="filterByCategory('Science')">
+    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300" alt="Science Museums">
+    <div class="category-info">
+      <h3>Science Museums</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Archaeology" onclick="filterByCategory('Archaeology')">
+    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Archaeology Museums">
+    <div class="category-info">
+      <h3>Archaeology</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Natural History" onclick="filterByCategory('Natural History')">
+    <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=300" alt="Natural History Museums">
+    <div class="category-info">
+      <h3>Natural History</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Transportation" onclick="filterByCategory('Transportation')">
+    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=300" alt="Transportation Museums">
+    <div class="category-info">
+      <h3>Transportation</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Aerospace" onclick="filterByCategory('Aerospace')">
+    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300" alt="Aerospace Museums">
+    <div class="category-info">
+      <h3>Aerospace</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Modern Art" onclick="filterByCategory('Modern Art')">
+    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300" alt="Modern Art Museums">
+    <div class="category-info">
+      <h3>Modern Art</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Cultural Heritage" onclick="filterByCategory('Cultural Heritage')">
+    <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Cultural Heritage Museums">
+    <div class="category-info">
+      <h3>Cultural Heritage</h3>
+    </div>
+  </div>
+
+  <div class="category-card" data-category="Maritime" onclick="filterByCategory('Maritime')">
+    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Maritime Museums">
+    <div class="category-info">
+      <h3>Maritime</h3>
+    </div>
+  </div>
+</section>
+
+
+<div class="section-header">
+  <h2 class="section-title">Top Museums</h2>
+</div>
+<div class="carousel-wrapper">
+  <button class="scroll-btn left" id="scrollLeftTop">‹</button>
+  <button class="scroll-btn right" id="scrollRightTop">›</button>
+  <div class="carousel-container" id="carouselBox2">
+    <div class="carousel-track" id="carousel2">
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400" alt="Museum 1">
+      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=400" alt="Museum 2">
+      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=400" alt="Museum 3">
+      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=400" alt="Museum 4">
+      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400" alt="Museum 1">
+      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=400" alt="Museum 2">
+    </div>
+  </div>
+</div>
+
+
+<div class="section-header">
+  <h2 class="section-title">Most-Attended Museums</h2>
+  <a href="archaeology.html" class="see-all-btn">See All</a>
+</div>
+<div class="scrollable-wrapper">
+  
+  <section class="image" id="archaeologySection">
+    <div class="card" data-name="Archaeological Museum" data-city="Mangalore" data-category="Archaeology">  
+      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Archaeological Museum">  
+      <div class="info">  
+        <h3>Archaeological Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Government Museum" data-city="Bengaluru" data-category="Archaeology">  
+      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Government Museum Bengaluru">  
+      <div class="info">  
+        <h3>Government Museum, Bengaluru</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Ancient Artifacts Museum" data-city="Chennai" data-category="Archaeology">  
+      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=300" alt="Ancient Museum">  
+      <div class="info">  
+        <h3>Ancient Artifacts Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Heritage Museum" data-city="Mysore" data-category="Archaeology">  
+      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="Heritage Museum">  
+      <div class="info">  
+        <h3>Heritage Museum</h3>   
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Historical Museum" data-city="Hampi" data-category="Archaeology">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Historical Museum">  
+      <div class="info">  
+        <h3>Historical Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="section-header">
+  <h2 class="section-title">Featured Museums</h2>
+  <a href="most.html" class="see-all-btn">See All</a>
+</div>
+<div class="scrollable-wrapper">
+  
+  <section class="image" id="featuredSection">
+    <div class="card" data-name="Aloyseum Museum" data-city="Mangalore" data-category="Art">  
+      <img src="https://aroundmangalore.com/wp-content/uploads/2015/08/St.-Aloysius-Chapel-Light-House-Hill-Road-Kodailbail-Mangalore-P4.jpg" alt="Aloyseum Museum">  
+      <div class="info">  
+        <h3>Aloyseum Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Legends Motorcycle Museum" data-city="Bengaluru" data-category="Vintage motorcycles">  
+      <img src="https://www.legendsmotorco.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flegends-motorcycle-museum.41aca16d.jpg&w=750&q=70" alt="Legends Motorcycle Museum">  
+      <div class="info">  
+        <h3>Legends Motorcycle Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Mysore Rail Museum" data-city="Mysore" data-category="Rail heritage">  
+      <img src="https://www.joonsquare.com/usermanage/image/business/railway-museum-mysore-mysuru-58628/railway-museum-mysore-mysuru-railway-museum-mysore-01.jpg" alt="Mysore Rail Museum">  
+      <div class="info">  
+        <h3>Mysore Rail Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Shivappa Nayaka Palace, Shimoga" data-city="Shimoga" data-category="History">  
+      <img src="https://1.bp.blogspot.com/-09RMxTuQL0o/YImPfWpPjHI/AAAAAAAACa4/hXTUWTqpLtsPPmZ8FsHQh3W1ddAOX01KQCPcBGAYYCw/s1032/4e072119-ea54-4e5e-938c-9c029c356dd9.jpg" alt="Shivappa Nayaka Palace, Shimoga">  
+      <div class="info">  
+        <h3>Shivappa Nayaka Palace, Shimoga</h3>   
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Folklore Museum ,Mysuru" data-city="Mysore" data-category="Folklore exhibits">  
+      <img src="https://media.tripinvites.com/places/mysore/folklore-museum/folklore-museum-featured.jpg" alt="Folklore Museum ,Mysuru">  
+      <div class="info">  
+        <h3>Folklore Museum ,Mysuru</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Regional Museum of Natural History Mysore" data-city="Mysore" data-category="Natural history museums">  
+      <img src="https://www.explorebees.com/uploads/Regional%20Museum%20of%20Natural%20History.jpg" alt="Regional Museum of Natural History Mysore">  
+      <div class="info">  
+        <h3>Regional Museum of Natural History Mysore</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Janapada Loka Folk Museum" data-city="Ramanagara" data-category="Folk Art">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Janapada Loka Folk Museum">  
+      <div class="info">  
+        <h3>Janapada Loka Folk Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Visvesvaraya Industrial Museum" data-city="Bangalore" data-category="Science">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Visvesvaraya Industrial Museum">  
+      <div class="info">  
+        <h3>Visvesvaraya Industrial Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Karnataka Chitrakala Parishath" data-city="Bangalore" data-category="Art">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Karnataka Chitrakala Parishath">  
+      <div class="info">  
+        <h3>Karnataka Chitrakala Parishath</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="National Gallery of Modern Art" data-city="Bangalore" data-category="Modern Art">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="National Gallery of Modern Art">  
+      <div class="info">  
+        <h3>National Gallery of Modern Art</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="section-header">
+  <h2 class="section-title">Kids Favourite Museums</h2>
+  <a href="kids.html" class="see-all-btn">See All</a>
+</div>
+<div class="scrollable-wrapper">
+  
+  <section class="image" id="kidsSection">
+    <div class="card" data-name="Children's Science Museum" data-city="Bangalore" data-category="Science">  
+      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Children's Science Museum">  
+      <div class="info">  
+        <h3>Children's Science Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Toy Museum" data-city="Mysore" data-category="Toys">  
+      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Toy Museum">  
+      <div class="info">  
+        <h3>Toy Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Interactive Science Center" data-city="Chennai" data-category="Science">  
+      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=300" alt="Interactive Science Center">  
+      <div class="info">  
+        <h3>Interactive Science Center</h3>  
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Kids Discovery Museum" data-city="Bangalore" data-category="Interactive">  
+      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="Kids Discovery Museum">  
+      <div class="info">  
+        <h3>Kids Discovery Museum</h3>   
+        <button>BOOK NOW</button>  
+      </div>  
+    </div> 
+
+    <div class="card" data-name="Fun Learning Museum" data-city="Mysore" data-category="Educational">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Fun Learning Museum">  
+      <div class="info">  
+        <h3>Fun Learning Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Space Adventure Museum" data-city="Bangalore" data-category="Space">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Space Adventure Museum">  
+      <div class="info">  
+        <h3>Space Adventure Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Dinosaur Discovery Center" data-city="Mysore" data-category="Natural History">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Dinosaur Discovery Center">  
+      <div class="info">  
+        <h3>Dinosaur Discovery Center</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Art & Craft Museum" data-city="Bangalore" data-category="Art">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Art & Craft Museum">  
+      <div class="info">  
+        <h3>Art & Craft Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div> 
+    <div class="card" data-name="Animation & Comics Museum" data-city="Chennai" data-category="Entertainment">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Animation & Comics Museum">  
+      <div class="info">  
+        <h3>Animation & Comics Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+	 <div class="card" data-name="Miniature World Museum" data-city="Bangalore" data-category="Miniatures">  
+      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Miniature World Museum">  
+      <div class="info">  
+        <h3>Miniature World Museum</h3>  
+        <button>BOOK NOW</button>  
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <h2 class="footer-name">Museum Ticket Booking</h2>
+  <div class="social-icons">
+    <a href="#" class="social-icon" title="Facebook">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+    </a>
+    <a href="#" class="social-icon" title="Twitter">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+    </a>
+    <a href="#" class="social-icon" title="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="#" class="social-icon" title="YouTube">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube">
+    </a>
+    <a href="#" class="social-icon" title="LinkedIn">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+    </a>
+  </div>
+  <div class="copyright">
+    © 2026 Museum Ticket Booking. All rights reserved. Discover the world's finest museums and cultural exhibitions through our comprehensive booking platform. We connect art enthusiasts, history lovers, and curious minds with extraordinary experiences across the globe. Your journey through human culture and achievement starts here.
+  </div>
+</footer>
+
+<script>
+  const allMuseums = [];
+  
+  document.querySelectorAll('.card').forEach(card => {
+    allMuseums.push({
+      name: card.dataset.name,
+      city: card.dataset.city,
+      category: card.dataset.category,
+      img: card.querySelector('img').src
+    });
+  });
+  
+  localStorage.setItem('allMuseums', JSON.stringify(allMuseums));
+
+  
+  function filterByCategory(category) {
+    localStorage.setItem('searchQuery', category);
+    window.location.href = 'search.html';
+  }
+
+  const carouselBox1 = document.getElementById('carouselBox1');
+  const carousel1 = document.getElementById('carousel1');
+  const scrollLeftPop = document.getElementById('scrollLeftPop');
+  const scrollRightPop = document.getElementById('scrollRightPop');
+
+  let popScrollX = 0;
+  let popIsDragging = false;
+  let popLastX = 0;
+  let popVelocity = -1;
+  let popIsUserInteracting = false;
+
+  function animatePopular() {
+    if (!popIsDragging && !popIsUserInteracting) {
+      popScrollX += popVelocity;
+    }
+    const trackWidth = carousel1.scrollWidth / 2;
+    if (popScrollX <= -trackWidth) {
+      popScrollX += trackWidth;
+    } else if (popScrollX >= 0) {
+      popScrollX -= trackWidth;
+    }
+    carousel1.style.transform = `translateX(${popScrollX}px)`;
+    requestAnimationFrame(animatePopular);
+  }
+
+  carouselBox1.addEventListener("pointerdown", (e) => {
+    popIsDragging = true;
+    popIsUserInteracting = true;
+    popLastX = e.clientX;
+    popVelocity = 0;
+    carouselBox1.style.cursor = "grabbing";
+  });
+
+  carouselBox1.addEventListener("pointermove", (e) => {
+    if (!popIsDragging) return;
+    const delta = e.clientX - popLastX;
+    popScrollX += delta;
+    popLastX = e.clientX;
+  });
+
+  carouselBox1.addEventListener("pointerup", () => {
+    popIsDragging = false;
+    popVelocity = -1;
+    carouselBox1.style.cursor = "grab";
+    setTimeout(() => {
+      popIsUserInteracting = false;
+    }, 2000);
+  });
+
+  carouselBox1.addEventListener("pointerleave", () => {
+    if (popIsDragging) {
+      popIsDragging = false;
+      popVelocity = -1;
+      carouselBox1.style.cursor = "grab";
+      setTimeout(() => {
+        popIsUserInteracting = false;
+      }, 2000);
+    }
+  });
+
+  scrollLeftPop.addEventListener("click", () => {
+    popIsUserInteracting = true;
+    popScrollX += 400;
+    setTimeout(() => {
+      popIsUserInteracting = false;
+    }, 2000);
+  });
+
+  scrollRightPop.addEventListener("click", () => {
+    popIsUserInteracting = true;
+    popScrollX -= 400;
+    setTimeout(() => {
+      popIsUserInteracting = false;
+    }, 2000);
+  });
+
+  animatePopular();
+
+  const carouselBox2 = document.getElementById('carouselBox2');
+  const carousel2 = document.getElementById('carousel2');
+  const scrollLeftTop = document.getElementById('scrollLeftTop');
+  const scrollRightTop = document.getElementById('scrollRightTop');
+
+  let topScrollX = 0;
+  let topIsDragging = false;
+  let topLastX = 0;
+  let topVelocity = -1;
+  let topIsUserInteracting = false;
+
+  function animateTop() {
+    if (!topIsDragging && !topIsUserInteracting) {
+      topScrollX += topVelocity;
+    }
+    const trackWidth = carousel2.scrollWidth / 2;
+    if (topScrollX <= -trackWidth) {
+      topScrollX += trackWidth;
+    } else if (topScrollX >= 0) {
+      topScrollX -= trackWidth;
+    }
+    carousel2.style.transform = `translateX(${topScrollX}px)`;
+    requestAnimationFrame(animateTop);
+  }
+
+  carouselBox2.addEventListener("pointerdown", (e) => {
+    topIsDragging = true;
+    topIsUserInteracting = true;
+    topLastX = e.clientX;
+    topVelocity = 0;
+    carouselBox2.style.cursor = "grabbing";
+  });
+
+  carouselBox2.addEventListener("pointermove", (e) => {
+    if (!topIsDragging) return;
+    const delta = e.clientX - topLastX;
+    topScrollX += delta;
+    topLastX = e.clientX;
+  });
+
+  carouselBox2.addEventListener("pointerup", () => {
+    topIsDragging = false;
+    topVelocity = -1;
+    carouselBox2.style.cursor = "grab";
+    setTimeout(() => {
+      topIsUserInteracting = false;
+    }, 2000);
+  });
+
+  carouselBox2.addEventListener("pointerleave", () => {
+    if (topIsDragging) {
+      topIsDragging = false;
+      topVelocity = -1;
+      carouselBox2.style.cursor = "grab";
+      setTimeout(() => {
+        topIsUserInteracting = false;
+      }, 2000);
+    }
+  });
+
+  scrollLeftTop.addEventListener("click", () => {
+    topIsUserInteracting = true;
+    topScrollX += 400;
+    setTimeout(() => {
+      topIsUserInteracting = false;
+    }, 2000);
+  });
+
+  scrollRightTop.addEventListener("click", () => {
+    topIsUserInteracting = true;
+    topScrollX -= 400;
+    setTimeout(() => {
+      topIsUserInteracting = false;
+    }, 2000);
+  });
+
+  animateTop();
+
+  // NEW BOOKING REDIRECT FUNCTIONALITY
+  function redirectToBooking(name, city, category, img) {
+    const bookingData = {
+      name: name,
+      city: city,
+      category: category,
+      img: img
+    };
+    
+    localStorage.setItem('bookingDetails', JSON.stringify(bookingData));
+    window.location.href = 'booking-details .html';
+  }
+
+  // Attach click handlers to all cards and buttons
+  function attachBookingHandlers() {
+    document.querySelectorAll('.card').forEach(card => {
+      const name = card.dataset.name;
+      const city = card.dataset.city;
+      const category = card.dataset.category;
+      const img = card.querySelector('img').src;
+      
+      // Click on card (anywhere except button)
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+          redirectToBooking(name, city, category, img);
+        }
+      });
+      
+      // Click on button
+      const button = card.querySelector('button');
+      if (button) {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          redirectToBooking(name, city, category, img);
+        });
+      }
+    });
+  }
+
+  // Call after DOM is ready
+  document.addEventListener('DOMContentLoaded', attachBookingHandlers);
+  // Also call immediately in case DOM is already loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachBookingHandlers);
+  } else {
+    attachBookingHandlers();
+  }
+</script>
+
+</body>
+</html>

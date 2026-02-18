@@ -12,7 +12,7 @@
 }
 body{
   font-family: "Poppins", Arial, sans-serif;
-  background: white;
+  background:white;
   margin:0;
   padding:0;
   color:#222;
@@ -20,12 +20,12 @@ body{
 
 
 header{
-  background: linear-gradient(90deg,#3b2308,#5a3410);
+  background: white;
   padding:30px 10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  
 }
 header h1{
-  color:#fff;
+  color:black;
   margin:0;
   font-size:32px;
   letter-spacing:1px;
@@ -44,20 +44,20 @@ nav button{
   font-size:15px;
   border:none;
   border-radius:30px;
-  background:#fff;
+  background:white;
   cursor:pointer;
   font-weight:600;
   transition:all .3s ease;
 }
 nav button:hover{
-  background:black;
-  color:#fff;
+  background:white;
+  color:black;
   transform:translateY(-2px);
 }
 
 .search-icon-btn{
-  background:#fff;
-  border:2px solid white;
+  background:white;
+  
   border-radius:50%;
   width:45px;
   height:45px;
@@ -69,7 +69,7 @@ nav button:hover{
 }
 
 .search-icon-btn:hover{
-  background:#d46a6a;
+  background:#222;
   transform:scale(1.1);
 }
 
@@ -227,8 +227,8 @@ nav button:hover{
 
 
 .card{
-  height:500px;
-  width:360px;
+  height:400px;
+  width:300px;
   background:#fff;
   border-radius:14px;
   overflow:hidden;
@@ -242,8 +242,8 @@ nav button:hover{
   box-shadow:0 12px 24px rgba(0,0,0,.35);
 }
 .card img{
-  width:400px;
-  height:390px;
+  width:300px;
+  height:290px;
   object-fit:cover;
   pointer-events:none;
 }
@@ -306,11 +306,11 @@ nav button:hover{
 }
 
 footer {
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  color: white;
-  padding:40px 20px 20px;
-  text-align: center;
-  margin-top:50px;
+	  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+	  color: white;
+	  padding:40px 20px 20px;
+	  text-align: center;
+	  margin-top:50px;
 }
 
 .footer-name {
@@ -383,13 +383,12 @@ footer {
   <button>Home</button>
   <button>Offers</button>
   <button>Exhibitions</button>
-  <button>Profile</button>
+  <button onclick="window.location.href='profile.html'">Profile</button>
   <button class="search-icon-btn" onclick="window.location.href='search.html'">
     <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
   </button>
 </nav>
 
-<!-- POPULAR MUSEUMS CAROUSEL -->
 <div class="section-header">
   <h2 class="section-title">Popular Museums</h2>
 </div>
@@ -402,12 +401,13 @@ footer {
       <img src="https://holidify.com/images/attr_wiki/compressed/attr_wiki_2053.jpg" alt="HIL">
       <img src="https://londonwithlittles.com/wp-content/uploads/2025/02/London-With-Littles-Grant-Museum-of-Zoology-dolphin.jpg" alt="Zoology Museum, Karnatak Science College ">
       <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/0d/d1/0d/exhibits.jpg?w=1200&h=1200&s=1" alt="Legends Motorcycle Museum">
-      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
+      <img src="https://im.hunt.in/cg/dharwad/City-Guide/regionalscience.jpg" alt="Regional Science Museum ">
       <img src="https://www.american-rails.com/images/82582096820947006.jpg" alt="steam locomotive">
       <img src="https://holidify.com/images/attr_wiki/compressed/attr_wiki_2053.jpg" alt="Museum HIL">
 	   <img src="https://londonwithlittles.com/wp-content/uploads/2025/02/London-With-Littles-Grant-Museum-of-Zoology-dolphin.jpg" alt="Zoology Museum, Karnatak Science College">
-      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/0d/d1/0d/exhibits.jpg?w=1200&h=1200&s=1https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=400" alt="Legends Motorcycle Museum">
-      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/0d/d1/0d/exhibits.jpg?w=1200&h=1200&s=1" alt="Legends Motorcycle Museum">
+      <img src="https://im.hunt.in/cg/dharwad/City-Guide/regionalscience.jpg" alt="Regional Science Museum ">
+        
     </div>
   </div>
 </div>
@@ -491,155 +491,78 @@ footer {
   </section>
 </div>
 
-<div class="section-header">
-  <h2 class="section-title">Weekend Best Museum Events </h2>
-</div>
-<section class="image" id="categorySection">
-  <div class="category-card" data-category="Art" onclick="filterByCategory('Art')">
-    <img src="https://images.unsplash.com/photo-1578926078830-57e8d2ef9b3f?w=300" alt="Art Museums">
-    <div class="category-info">
-      <h3>Art Museums</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="History" onclick="filterByCategory('History')">
-    <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="History Museums">
-    <div class="category-info">
-      <h3>History Museums</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Science" onclick="filterByCategory('Science')">
-    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300" alt="Science Museums">
-    <div class="category-info">
-      <h3>Science Museums</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Archaeology" onclick="filterByCategory('Archaeology')">
-    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Archaeology Museums">
-    <div class="category-info">
-      <h3>Archaeology</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Natural History" onclick="filterByCategory('Natural History')">
-    <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=300" alt="Natural History Museums">
-    <div class="category-info">
-      <h3>Natural History</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Transportation" onclick="filterByCategory('Transportation')">
-    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=300" alt="Transportation Museums">
-    <div class="category-info">
-      <h3>Transportation</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Aerospace" onclick="filterByCategory('Aerospace')">
-    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300" alt="Aerospace Museums">
-    <div class="category-info">
-      <h3>Aerospace</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Modern Art" onclick="filterByCategory('Modern Art')">
-    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300" alt="Modern Art Museums">
-    <div class="category-info">
-      <h3>Modern Art</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Cultural Heritage" onclick="filterByCategory('Cultural Heritage')">
-    <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Cultural Heritage Museums">
-    <div class="category-info">
-      <h3>Cultural Heritage</h3>
-    </div>
-  </div>
-
-  <div class="category-card" data-category="Maritime" onclick="filterByCategory('Maritime')">
-    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Maritime Museums">
-    <div class="category-info">
-      <h3>Maritime</h3>
-    </div>
-  </div>
-</section>
-
-
-
 
 <div class="section-header">
   <h2 class="section-title">Browse By Category </h2>
 </div>
 <section class="image" id="categorySection2">
   <div class="category-card" data-category="Art" onclick="filterByCategory('Art')">
-    <img src="https://images.unsplash.com/photo-1578926078830-57e8d2ef9b3f?w=300" alt="Art Museums">
+    <img src="https://www.keralatourism.org/images/picture/large/Kathakali_Ancient_Performing_art_from_Kerala_2621.jpg" alt="Art Museums">
     <div class="category-info">
       <h3>Art Museums</h3>
     </div>
   </div>
 
   <div class="category-card" data-category="History" onclick="filterByCategory('History')">
-    <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="History Museums">
+    <img src="https://www.trawell.in/blog/wp-content/uploads/2021/01/Hampi.jpg" alt="History Museums">
     <div class="category-info">
       <h3>History Museums</h3>
     </div>
   </div>
 
   <div class="category-card" data-category="Science" onclick="filterByCategory('Science')">
-    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300" alt="Science Museums">
+    <img src="https://static.vecteezy.com/system/resources/previews/022/006/509/large_2x/science-background-illustration-scientific-design-flasks-glass-and-chemistry-physics-elements-generative-ai-photo.jpeg" alt="Science Museums">
     <div class="category-info">
       <h3>Science Museums</h3>
     </div>
   </div>
 
   <div class="category-card" data-category="Archaeology" onclick="filterByCategory('Archaeology')">
-    <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Archaeology Museums">
+    <img src="https://cdn.mos.cms.futurecdn.net/9YF4kNKpdftLrobHDexidn-1200-80.jpg" alt="Archaeology Museums">
     <div class="category-info">
       <h3>Archaeology</h3>
     </div>
   </div>
 
-  <div class="category-card" data-category="Natural History" onclick="filterByCategory('Natural History')">
-    <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=300" alt="Natural History Museums">
+  <div class="category-card" data-category="Rail heritage" onclick="filterByCategory('Rail heritage')">
+    <img src="https://orhf.org/wp-content/uploads/2023/06/Polson2-1920x1360.jpg" alt="Rail heritage">
     <div class="category-info">
-      <h3>Natural History</h3>
+      <h3>Rail heritage</h3>
     </div>
   </div>
 
-  <div class="category-card" data-category="Transportation" onclick="filterByCategory('Transportation')">
-    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=300" alt="Transportation Museums">
+  <div class="category-card" data-category="Folk arts" onclick="filterByCategory('Folk exhibits')">
+    <img src="https://www.theartlifegallery.com/blog/wp-content/uploads/2022/08/folkart.jpg" alt="Folk exhibits">
     <div class="category-info">
-      <h3>Transportation</h3>
+      <h3>Folk exhibits</h3>
     </div>
   </div>
 
   <div class="category-card" data-category="Aerospace" onclick="filterByCategory('Aerospace')">
-    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?w=300" alt="Aerospace Museums">
+    <img src="https://wallpaperaccess.com/full/2101528.jpg" alt="Aerospace Museums">
     <div class="category-info">
       <h3>Aerospace</h3>
     </div>
   </div>
 
-  <div class="category-card" data-category="Modern Art" onclick="filterByCategory('Modern Art')">
-    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300" alt="Modern Art Museums">
+  <div class="category-card" data-category="Modern Art" onclick="filterByCategory('Visual culture')">
+    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=300" alt="Visual culture">
     <div class="category-info">
-      <h3>Modern Art</h3>
+      <h3>Visual culture</h3>
     </div>
   </div>
 
-  <div class="category-card" data-category="Cultural Heritage" onclick="filterByCategory('Cultural Heritage')">
-    <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Cultural Heritage Museums">
+  <div class="category-card" data-category="Vintage motorcycles" onclick="filterByCategory('Vintage motorcycles')">
+    <img src="https://img.freepik.com/premium-vector/vintage-motorcycle-racing_625492-30585.jpg" alt="Vintage motorcycle">
     <div class="category-info">
-      <h3>Cultural Heritage</h3>
+      <h3>Vintage motorcycles</h3>
     </div>
   </div>
 
-  <div class="category-card" data-category="Maritime" onclick="filterByCategory('Maritime')">
-    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Maritime Museums">
+  <div class="category-card" data-category="Natural history museumse" onclick="filterByCategory('Natural history museums')">
+    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Natural history museums">
     <div class="category-info">
-      <h3>Maritime</h3>
+      <h3>Natural history museums</h3>
     </div>
   </div>
 </section>
@@ -653,69 +576,22 @@ footer {
   <button class="scroll-btn right" id="scrollRightTop">›</button>
   <div class="carousel-container" id="carouselBox2">
     <div class="carousel-track" id="carousel2">
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400" alt="Museum 1">
-      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=400" alt="Museum 2">
-      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=400" alt="Museum 3">
-      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=400" alt="Museum 4">
-      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=400" alt="Museum 5">
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400" alt="Museum 1">
-      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=400" alt="Museum 2">
-    </div>
+      <img src="https://imvoyager.com/wp-content/uploads/2021/08/Aayagararamala.jpg" alt="janapada loka">
+      <img src="https://www.joonsquare.com/usermanage/image/business/manjusha-museum-dakshina-kannada-58626/manjusha-museum-dakshina-kannada-manjusha-museum-02.jpg" alt="Manjusha Museum">
+      <img src="https://www.ing.pan.pl/files/users/muzeum/005.JPG" alt="Geological Museum ">
+      <img src="https://news.utoledo.edu/wp-content/uploads/2013/12/plastination-museum-overview-by-Dan.jpg" alt="Museum of Anatomy and Pathology">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcNCL14uLQK_QEBdsMBpxXmOJVKgcnpT-WfRJYyLmwSMK0NDdix9CxzlCM0ROQgOPPy-i1aFSau-bwgXae9Wv86UqAJ_jijl2_mWepY65Uwe4oQdhlWrafRv66sHJs63vxHYnz30GC0SNZ/s1600/29+Jagatjyoti+Basaveshwara+Gadag.jpg" alt="Government Museum, Gadag">
+      <img src="https://imvoyager.com/wp-content/uploads/2021/08/Aayagararamala.jpg" alt="janapada loka">
+      <img src="https://www.joonsquare.com/usermanage/image/business/manjusha-museum-dakshina-kannada-58626/manjusha-museum-dakshina-kannada-manjusha-museum-02.jpg" alt="Manjusha Museum">
+	  <img src="https://www.ing.pan.pl/files/users/muzeum/005.JPG" alt="Geological Museum ">
+	   <img src="https://news.utoledo.edu/wp-content/uploads/2013/12/plastination-museum-overview-by-Dan.jpg" alt="Museum of Anatomy and Pathology">
+	         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcNCL14uLQK_QEBdsMBpxXmOJVKgcnpT-WfRJYyLmwSMK0NDdix9CxzlCM0ROQgOPPy-i1aFSau-bwgXae9Wv86UqAJ_jijl2_mWepY65Uwe4oQdhlWrafRv66sHJs63vxHYnz30GC0SNZ/s1600/29+Jagatjyoti+Basaveshwara+Gadag.jpg" alt="Government Museum, Gadag">
   </div>
 </div>
 
 
 <div class="section-header">
   <h2 class="section-title">Most-Attended Museums</h2>
-  <a href="archaeology.html" class="see-all-btn">See All</a>
-</div>
-<div class="scrollable-wrapper">
-  
-  <section class="image" id="archaeologySection">
-    <div class="card" data-name="Archaeological Museum" data-city="Mangalore" data-category="Archaeology">  
-      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Archaeological Museum">  
-      <div class="info">  
-        <h3>Archaeological Museum</h3>  
-        <button>BOOK NOW</button>  
-      </div>  
-    </div> 
-
-    <div class="card" data-name="Government Museum" data-city="Bengaluru" data-category="Archaeology">  
-      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Government Museum Bengaluru">  
-      <div class="info">  
-        <h3>Government Museum, Bengaluru</h3>  
-        <button>BOOK NOW</button>  
-      </div>  
-    </div> 
-
-    <div class="card" data-name="Ancient Artifacts Museum" data-city="Chennai" data-category="Archaeology">  
-      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=300" alt="Ancient Museum">  
-      <div class="info">  
-        <h3>Ancient Artifacts Museum</h3>  
-        <button>BOOK NOW</button>  
-      </div>  
-    </div> 
-
-    <div class="card" data-name="Heritage Museum" data-city="Mysore" data-category="Archaeology">  
-      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="Heritage Museum">  
-      <div class="info">  
-        <h3>Heritage Museum</h3>   
-        <button>BOOK NOW</button>  
-      </div>  
-    </div> 
-
-    <div class="card" data-name="Historical Museum" data-city="Hampi" data-category="Archaeology">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Historical Museum">  
-      <div class="info">  
-        <h3>Historical Museum</h3>  
-        <button>BOOK NOW</button>  
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="section-header">
-  <h2 class="section-title">Featured Museums</h2>
   <a href="most.html" class="see-all-btn">See All</a>
 </div>
 <div class="scrollable-wrapper">
@@ -767,31 +643,31 @@ footer {
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Janapada Loka Folk Museum" data-city="Ramanagara" data-category="Folk Art">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Janapada Loka Folk Museum">  
+	 <div class="card" data-name="Srimanthi Bhai Memorial Government Museum" data-city="Mangalore" data-category="Archaeological">  
+      <img src="https://mangaloretourism.in/images/tourist-places/srimanthi-bai-memorial-government-museum-bejai-museum-mangalore/srimanthi-bai-memorial-government-museum-bejai-museum-mangalore-tourism-location-address.jpg" alt="Srimanthi Bhai Memorial Government Museum">  
       <div class="info">  
-        <h3>Janapada Loka Folk Museum</h3>  
+        <h3>Srimanthi Bhai Memorial Government Museum</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Visvesvaraya Industrial Museum" data-city="Bangalore" data-category="Science">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Visvesvaraya Industrial Museum">  
+	 <div class="card" data-name="Dharwad Regional Science Centre" data-city="Dharwad " data-category="Science">  
+      <img src="https://3.bp.blogspot.com/--j8_ft-kmGE/UGrT6_k6JnI/AAAAAAAAOek/yNZlOlmJTyk/s1600/02+Dharwad+Regional+Science+Center.jpg" alt="Dharwad Regional Science Centre">  
       <div class="info">  
-        <h3>Visvesvaraya Industrial Museum</h3>  
+        <h3>Dharwad Regional Science Centre</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Karnataka Chitrakala Parishath" data-city="Bangalore" data-category="Art">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Karnataka Chitrakala Parishath">  
+	 <div class="card" data-name="Museum of Art & Photography" data-city="Bengaluru" data-category="Visual culture">  
+      <img src="https://images.adsttc.com/media/images/641d/d21c/5e7a/1362/d621/455d/large_jpg/the-museum-of-art-and-photography-bangalore-mathew-and-ghosh-architects_9.jpg?1679675953" alt="Museum of Art & Photography">  
       <div class="info">  
-        <h3>Karnataka Chitrakala Parishath</h3>  
+        <h3>Museum of Art & Photography</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="National Gallery of Modern Art" data-city="Bangalore" data-category="Modern Art">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="National Gallery of Modern Art">  
+	 <div class="card" data-name="janapada loka ramanagara" data-city="ramanagara" data-category="Folk arts">  
+      <img src="https://imvoyager.com/wp-content/uploads/2021/08/Folk-Dances-of-Karnataka-JPL2.jpg" alt="janapada loka ramanagara">  
       <div class="info">  
-        <h3>National Gallery of Modern Art</h3>  
+        <h3>janapada loka ramanagara</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
@@ -799,76 +675,76 @@ footer {
 </div>
 
 <div class="section-header">
-  <h2 class="section-title">Kids Favourite Museums</h2>
+  <h2 class="section-title">Peoples Favourite Museums</h2>
   <a href="kids.html" class="see-all-btn">See All</a>
 </div>
 <div class="scrollable-wrapper">
   
   <section class="image" id="kidsSection">
-    <div class="card" data-name="Children's Science Museum" data-city="Bangalore" data-category="Science">  
-      <img src="https://images.unsplash.com/photo-1566127444026-86c9e0c3c2b8?w=300" alt="Children's Science Museum">  
+    <div class="card" data-name="Visvesvaraya Industrial and Technological Museum" data-city="Bangalore" data-category="Science">  
+      <img src="https://static2.tripoto.com/media/filter/nl/img/51804/TripDocument/engine_hall_vitm_bangalore.jpg" alt="Visvesvaraya Industrial and Technological Museum">  
       <div class="info">  
-        <h3>Children's Science Museum</h3>  
+        <h3>Visvesvaraya Industrial and Technological Museum</h3>  
         <button>BOOK NOW</button>  
       </div>  
     </div> 
 
-    <div class="card" data-name="Toy Museum" data-city="Mysore" data-category="Toys">  
-      <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=300" alt="Toy Museum">  
+    <div class="card" data-name="Mysore Sand Sculpture Museum" data-city="Mysore" data-category="sand sculpture ">  
+      <img src="https://www.trawell.in/admin/images/upload/211116122sand-museum.jpg" alt="Mysore Sand Sculpture Museum">  
       <div class="info">  
-        <h3>Toy Museum</h3>  
+        <h3>Mysore Sand Sculpture Museum</h3>  
         <button>BOOK NOW</button>  
       </div>  
     </div> 
 
-    <div class="card" data-name="Interactive Science Center" data-city="Chennai" data-category="Science">  
-      <img src="https://images.unsplash.com/photo-1564399579883-451a5d44ec08?w=300" alt="Interactive Science Center">  
+    <div class="card" data-name="Indian Music Experience Museum" data-city="Bangalore" data-category="art">  
+      <img src="https://rollingstoneindia.com/wp-content/uploads/2020/03/Indian-Music-Exp-30245-960x640.jpg" alt="Indian Music Experience Museum">  
       <div class="info">  
-        <h3>Interactive Science Center</h3>  
+        <h3>Indian Music Experience Museum</h3>  
         <button>BOOK NOW</button>  
       </div>  
     </div> 
 
-    <div class="card" data-name="Kids Discovery Museum" data-city="Bangalore" data-category="Interactive">  
-      <img src="https://images.unsplash.com/photo-1580913428706-c311e67898b3?w=300" alt="Kids Discovery Museum">  
+    <div class="card" data-name="Jawahar Lal Nehru Planetarium" data-city="Bangalore" data-category="Science">  
+      <img src="https://imvoyager.com/wp-content/uploads/2021/11/Jawaharlal-Nehru-Planetarium.jpeg" alt="Jawahar Lal Nehru Planetarium">  
       <div class="info">  
-        <h3>Kids Discovery Museum</h3>   
+        <h3>Jawahar Lal Nehru Planetarium</h3>   
         <button>BOOK NOW</button>  
       </div>  
     </div> 
 
-    <div class="card" data-name="Fun Learning Museum" data-city="Mysore" data-category="Educational">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Fun Learning Museum">  
+    <div class="card" data-name="The Heritage Centre & Aerospace Museum" data-city="Bangalore" data-category="Aerospace">  
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/b8/86/1c/photo3jpg.jpg?w=1200&h=-1&s=1" alt="The Heritage Centre & Aerospace Museum">  
       <div class="info">  
-        <h3>Fun Learning Museum</h3>  
+        <h3>The Heritage Centre & Aerospace Museum</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Space Adventure Museum" data-city="Bangalore" data-category="Space">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Space Adventure Museum">  
+	 <div class="card" data-name="Karnataka Chitrakala Parishat" data-city="Bangalore" data-category="art">  
+      <img src="https://im.whatshot.in/img/2022/Apr/karnataka-chitrakala-parishath-6-1650347451.jpg?wm=1&w=1200&h=630&cc=1" alt="Karnataka Chitrakala Parishat">  
       <div class="info">  
-        <h3>Space Adventure Museum</h3>  
+        <h3>Karnataka Chitrakala Parishat</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Dinosaur Discovery Center" data-city="Mysore" data-category="Natural History">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Dinosaur Discovery Center">  
+	 <div class="card" data-name="Pilikula Nisargadhama" data-city="Mysore" data-category="Natural History">  
+      <img src="https://mangaloretourism.in/images/tourist-places/pilikula-nisargadhama-mangalore/pilikula-nisargadhama-mangalore-india-tourism-history.jpg" alt="Pilikula Nisargadhama">  
       <div class="info">  
-        <h3>Dinosaur Discovery Center</h3>  
+        <h3>Pilikula Nisargadhama</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
-	 <div class="card" data-name="Art & Craft Museum" data-city="Bangalore" data-category="Art">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Art & Craft Museum">  
+	 <div class="card" data-name="Cauvery Handicrafts" data-city="Bangalore" data-category="Art">  
+      <img src="http://casualwalker.com/wp-content/uploads/2018/04/DSC_0903.jpg" alt="Cauvery Handicrafts">  
       <div class="info">  
-        <h3>Art & Craft Museum</h3>  
+        <h3>Cauvery Handicrafts</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div> 
-    <div class="card" data-name="Animation & Comics Museum" data-city="Chennai" data-category="Entertainment">  
-      <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=300" alt="Animation & Comics Museum">  
+    <div class="card" data-name="Curiouscity Science Centre" data-city="Chennai" data-category="Science">  
+      <img src="https://cdn1.tripoto.com/media/filter/nl/img/318037/Image/1693652631_img_20221030_152024.jpg.webp" alt="Curiouscity Science Centre">  
       <div class="info">  
-        <h3>Animation & Comics Museum</h3>  
+        <h3>Curiouscity Science Centre</h3>  
         <button>BOOK NOW</button>  
       </div>
     </div>
@@ -1082,7 +958,6 @@ footer {
 
   animateTop();
 
-  // NEW BOOKING REDIRECT FUNCTIONALITY
   function redirectToBooking(name, city, category, img) {
     const bookingData = {
       name: name,
@@ -1095,7 +970,6 @@ footer {
     window.location.href = 'booking_details.html';
   }
 
-  // Attach click handlers to all cards and buttons
   function attachBookingHandlers() {
     document.querySelectorAll('.card').forEach(card => {
       const name = card.dataset.name;
@@ -1103,14 +977,12 @@ footer {
       const category = card.dataset.category;
       const img = card.querySelector('img').src;
       
-      // Click on card (anywhere except button)
       card.addEventListener('click', (e) => {
         if (!e.target.closest('button')) {
           redirectToBooking(name, city, category, img);
         }
       });
       
-      // Click on button
       const button = card.querySelector('button');
       if (button) {
         button.addEventListener('click', (e) => {
@@ -1121,9 +993,7 @@ footer {
     });
   }
 
-  // Call after DOM is ready
   document.addEventListener('DOMContentLoaded', attachBookingHandlers);
-  // Also call immediately in case DOM is already loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', attachBookingHandlers);
   } else {

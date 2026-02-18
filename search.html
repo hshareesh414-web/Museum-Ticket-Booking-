@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Museum Ticket Booking</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+body{
+  font-family: "Poppins", Arial, sans-serif;
+  background: white;
+  margin:0;
+  padding:0;
+  color:#222;
+}
+
+header{
+  background: linear-gradient(90deg,#3b2308,#5a3410);
+  padding:30px 10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+header h1{
+  color:#fff;
+  margin:0;
+  font-size:32px;
+  letter-spacing:1px;
+}
+
+.top-section{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:20px 30px;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.back-button{
+  padding:15px 30px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:white-space;
+  border:2px solid white;
+  border-radius:30px;
+  color:black;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .3s ease;
+  text-decoration:none;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.back-button:hover{
+  background:white;
+  color:black;
+  transform:translateX(-5px);
+}
+
+.back-button::before{
+  content:"‹";
+  font-size:54px;
+  font-weight:bold;
+}
+
+.search-container{
+  flex:1;
+  position:relative;
+}
+
+.search-bar{
+  position:relative;
+  width:100%;
+}
+
+.search-bar input{
+  width:100%;
+  padding:18px 140px 18px 25px;
+  border-radius:12px;
+  border:3px solid #d46a6a;
+  outline:none;
+  font-size:18px;
+  background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  transition:all .3s ease;
+}
+
+.search-bar input:focus{
+  box-shadow:0 6px 20px rgba(212,106,106,0.3);
+  border-color:#b64f4f;
+}
+
+.search-btn{
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  padding:12px 25px;
+  border:none;
+  border-radius:8px;
+  background:#d46a6a;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.search-btn:hover{
+  background:#b64f4f;
+}
+
+.search-btn img{
+  width:18px;
+  height:18px;
+  filter:brightness(0) invert(1);
+}
+
+.suggestions-box{
+  position:absolute;
+  top:calc(100% + 10px);
+  left:0;
+  width:100%;
+  background:white;
+  border-radius:15px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.15);
+  max-height:400px;
+  overflow-y:auto;
+  z-index:100;
+  display:none;
+}
+
+.suggestion-item{
+  display:flex;
+  align-items:center;
+  padding:15px;
+  border-bottom:1px solid #f0f0f0;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.suggestion-item:hover{
+  background:#f8f8f8;
+}
+
+.suggestion-item:last-child{
+  border-bottom:none;
+}
+
+.suggestion-item img{
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-right:15px;
+}
+
+.suggestion-info h4{
+  margin:0 0 5px;
+  font-size:16px;
+  color:#2c2c2c;
+}
+
+.suggestion-info p{
+  margin:0;
+  font-size:13px;
+  color:#666;
+}
+
+.no-results{
+  padding:30px;
+  text-align:center;
+  color:#999;
+  font-size:16px;
+}
+
+.results-header{
+  text-align:center;
+  padding:40px 20px 20px;
+  background:white;
+  margin:30px 30px 30px;
+  border-radius:15px;
+}
+
+.results-header h2{
+  font-size:32px;
+  color:#2c2c2c;
+  margin:0 0 10px;
+}
+
+.results-header p{
+  color:#666;
+  font-size:16px;
+  margin:0;
+}
+
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+  gap:30px;
+  padding:20px 30px 60px;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.results-grid.hidden{
+  display:none;
+}
+
+.results-header.hidden{
+  display:none;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(0,0,0,.15);
+  transition:all .35s ease;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 12px 24px rgba(0,0,0,.25);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+.info{
+  padding:18px;
+}
+.info h3{
+  font-size:18px;
+  margin:0 0 8px;
+  color:#2c2c2c;
+}
+.info .location{
+  font-size:14px;
+  color:#666;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.info .category{
+  display:inline-block;
+  padding:4px 12px;
+  background:#f0f0f0;
+  border-radius:15px;
+  font-size:12px;
+  color:#666;
+  margin-bottom:12px;
+}
+.info button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#d46a6a;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+  font-size:15px;
+}
+.info button:hover{
+  background:#b64f4f;
+}
+
+@media(max-width:768px){
+  header h1{font-size:24px;}
+  .top-section{
+    flex-direction:column;
+    padding:15px;
+    gap:15px;
+  }
+  .back-button{
+    width:100%;
+    justify-content:center;
+    padding:12px 20px;
+  }
+  .search-container{
+    width:100%;
+  }
+  .search-bar input{
+    font-size:16px;
+    padding:15px 110px 15px 20px;
+  }
+  .search-btn{
+    padding:10px 20px;
+    font-size:14px;
+  }
+  .results-grid{
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:20px;
+    padding:15px;
+  }
+  .results-header h2{font-size:24px;}
+}
+
+nav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  padding:15px;
+  flex-wrap:wrap;
+}
+nav button{
+  padding:1px 1px;
+  font-size:15px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  cursor:pointer;
+  font-weight:600;
+  transition:all .3s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="top-section">
+  <a href="index.html" class="back-button"></a>
+  
+  <div class="search-container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search museums by name, city, or category..." autofocus>
+      <button class="search-btn" id="searchBtn">
+        <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search">
+        
+      </button>
+      <div class="suggestions-box" id="suggestionsBox"></div>
+    </div>
+  </div>
+</div>
+
+<div class="results-header hidden" id="resultsHeader">
+  <h2 id="resultsTitle"></h2>
+  <p id="resultsCount"></p>
+</div>
+
+<div class="results-grid hidden" id="resultsGrid"></div>
+
+<script>
+  let allMuseums = [];
+  try {
+    const storedMuseums = localStorage.getItem('allMuseums');
+    if (storedMuseums) {
+      allMuseums = JSON.parse(storedMuseums);
+    }
+  } catch (e) {
+    console.error('Error loading museum data:', e);
+  }
+
+  const searchInput = document.getElementById('searchInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const suggestionsBox = document.getElementById('suggestionsBox');
+  const resultsHeader = document.getElementById('resultsHeader');
+  const resultsTitle = document.getElementById('resultsTitle');
+  const resultsCount = document.getElementById('resultsCount');
+  const resultsGrid = document.getElementById('resultsGrid');
+
+  const prefilledQuery = localStorage.getItem('searchQuery');
+  if (prefilledQuery) {
+    searchInput.value = prefilledQuery;
+    performSearch(prefilledQuery);
+    localStorage.removeItem('searchQuery');
+  }
+
+  searchInput.addEventListener('input', showSuggestions);
+
+  function showSuggestions() {
+    const query = searchInput.value.trim().toLowerCase();
+    suggestionsBox.innerHTML = '';
+
+    if (query === '') {
+      suggestionsBox.style.display = 'none';
+      return;
+    }
+
+    const matches = allMuseums.filter(museum => {
+      const name = museum.name.toLowerCase();
+      const city = museum.city.toLowerCase();
+      const category = museum.category.toLowerCase();
+      return name.includes(query) || city.includes(query) || category.includes(query);
+    });
+
+    if (matches.length === 0) {
+      suggestionsBox.innerHTML = '<div class="no-results">No museums found</div>';
+      suggestionsBox.style.display = 'block';
+      return;
+    }
+
+    matches.slice(0, 5).forEach(museum => {
+      const item = document.createElement('div');
+      item.className = 'suggestion-item';
+      item.innerHTML = `
+        <img src="${museum.img}" alt="${museum.name}">
+        <div class="suggestion-info">
+          <h4>${museum.name}</h4>
+          <p>${museum.city} • ${museum.category}</p>
+        </div>
+      `;
+      
+      item.addEventListener('click', () => {
+        searchInput.value = museum.name;
+        suggestionsBox.style.display = 'none';
+        performSearch(museum.name);
+      });
+      
+      suggestionsBox.appendChild(item);
+    });
+
+    suggestionsBox.style.display = 'block';
+  }
+
+  searchBtn.addEventListener('click', () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      performSearch(query);
+    }
+  });
+
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim();
+      if (query) {
+        performSearch(query);
+      }
+    }
+  });
+
+  function performSearch(query) {
+    const queryLower = query.toLowerCase();
+    suggestionsBox.style.display = 'none';
+
+    const results = allMuseums.filter(museum => {
+      const name = museum.name.toLowerCase();
+      const city = museum.city.toLowerCase();
+      const category = museum.category.toLowerCase();
+      return name.includes(queryLower) || city.includes(queryLower) || category.includes(queryLower);
+    });
+
+    displayResults(results, query);
+  }
+
+  function displayResults(results, query) {
+    resultsGrid.innerHTML = '';
+
+    if (results.length === 0) {
+      resultsTitle.textContent = 'No Results Found';
+      resultsCount.textContent = `No museums found for "${query}"`;
+      resultsHeader.classList.remove('hidden');
+      resultsGrid.classList.add('hidden');
+      return;
+    }
+
+    resultsTitle.textContent = `Search Results for "${query}"`;
+    resultsCount.textContent = `Found ${results.length} museum${results.length === 1 ? '' : 's'}`;
+    resultsHeader.classList.remove('hidden');
+    resultsGrid.classList.remove('hidden');
+
+    results.forEach(museum => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${museum.img}" alt="${museum.name}">
+        <div class="info">
+          <h3>${museum.name}</h3>
+          <div class="location">📍 ${museum.city}</div>
+          <span class="category">${museum.category}</span>
+          <button onclick="bookMuseum('${museum.name}', '${museum.city}', '${museum.category}', '${museum.img}')">BOOK NOW</button>
+        </div>
+      `;
+      resultsGrid.appendChild(card);
+    });
+
+    resultsHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function bookMuseum(name, city, category, img) {
+    localStorage.setItem("bookingDetails", JSON.stringify({
+      name, city, category, img
+    }));
+    alert(`Booking: ${name}\nCity: ${city}\nCategory: ${category}\n\nBooking page coming soon!`);
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+      suggestionsBox.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

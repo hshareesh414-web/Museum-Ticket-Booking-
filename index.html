@@ -18,14 +18,15 @@ body{
   color:#222;
 }
 
-
 header{
-  background: white;
+  background: #1d0c5d;
+  box-shadow:0 4px 12px rgba(62,17,228,0.35);
   padding:30px 10px;
+  
   
 }
 header h1{
-  color:black;
+  color:white;
   margin:0;
   font-size:32px;
   letter-spacing:1px;
@@ -57,7 +58,6 @@ nav button:hover{
 
 .search-icon-btn{
   background:white;
-  
   border-radius:50%;
   width:45px;
   height:45px;
@@ -69,7 +69,7 @@ nav button:hover{
 }
 
 .search-icon-btn:hover{
-  background:#222;
+  background:rgb(15,23,286);
   transform:scale(1.1);
 }
 
@@ -174,7 +174,7 @@ nav button:hover{
 
 .scroll-btn{
   position:absolute;
-  top:50%;
+  
   transform:translateY(-50%);
   background:rgba(212,106,106,0.9);
   color:#fff;
@@ -306,7 +306,7 @@ nav button:hover{
 }
 
 footer {
-	  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+	  background: #5761a8;
 	  color: white;
 	  padding:40px 20px 20px;
 	  text-align: center;
@@ -317,7 +317,7 @@ footer {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 100%);
+  background: white;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -380,8 +380,8 @@ footer {
 </header>
 
 <nav>
-  <button>Home</button>
-  <button>Offers</button>
+  <button style = "background-color:white; color : #1c00bc" >Home</button>
+  <button  onclick= "window.location.href ='offers.html'">Offers</button>
   <button>Exhibitions</button>
   <button onclick="window.location.href='profile.html'">Profile</button>
   <button class="search-icon-btn" onclick="window.location.href='search.html'">
@@ -393,8 +393,8 @@ footer {
   <h2 class="section-title">Popular Museums</h2>
 </div>
 <div class="carousel-wrapper">
-  <button class="scroll-btn left" id="scrollLeftPop">‹</button>
-  <button class="scroll-btn right" id="scrollRightPop">›</button>
+  <button style="top:50%;" class="scroll-btn left" id="scrollLeftPop">‹</button>
+  <button style="top:50%;" class="scroll-btn right" id="scrollRightPop">›</button>
   <div class="carousel-container" id="carouselBox1">
     <div class="carousel-track" id="carousel1">
       <img src="https://www.american-rails.com/images/82582096820947006.jpg" alt="steam locomotive">
@@ -560,9 +560,9 @@ footer {
   </div>
 
   <div class="category-card" data-category="Natural history museumse" onclick="filterByCategory('Natural history museums')">
-    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Natural history museums">
+    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=300" alt="Natural museums">
     <div class="category-info">
-      <h3>Natural history museums</h3>
+      <h3>Natural museums</h3>
     </div>
   </div>
 </section>
@@ -572,8 +572,8 @@ footer {
   <h2 class="section-title">Top Museums</h2>
 </div>
 <div class="carousel-wrapper">
-  <button class="scroll-btn left" id="scrollLeftTop">‹</button>
-  <button class="scroll-btn right" id="scrollRightTop">›</button>
+  <button style="top:8%;" class="scroll-btn left" id="scrollLeftTop">‹</button>
+  <button style="top:8%;" class="scroll-btn right" id="scrollRightTop">›</button>
   <div class="carousel-container" id="carouselBox2">
     <div class="carousel-track" id="carousel2">
       <img src="https://imvoyager.com/wp-content/uploads/2021/08/Aayagararamala.jpg" alt="janapada loka">
@@ -588,6 +588,7 @@ footer {
 	         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjcNCL14uLQK_QEBdsMBpxXmOJVKgcnpT-WfRJYyLmwSMK0NDdix9CxzlCM0ROQgOPPy-i1aFSau-bwgXae9Wv86UqAJ_jijl2_mWepY65Uwe4oQdhlWrafRv66sHJs63vxHYnz30GC0SNZ/s1600/29+Jagatjyoti+Basaveshwara+Gadag.jpg" alt="Government Museum, Gadag">
   </div>
 </div>
+
 
 
 <div class="section-header">
@@ -967,7 +968,7 @@ footer {
     };
     
     localStorage.setItem('bookingDetails', JSON.stringify(bookingData));
-    window.location.href = 'booking_details.html';
+    window.location.href = 'booking_details.html	';
   }
 
   function attachBookingHandlers() {

@@ -17,19 +17,6 @@ body{
   padding:0;
   color:#222;
 }
-
-header{
-  background: linear-gradient(90deg,#3b2308,#5a3410);
-  padding:30px 10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.3);
-}
-header h1{
-  color:#fff;
-  margin:0;
-  font-size:32px;
-  letter-spacing:1px;
-}
-
 .top-section{
   display:flex;
   align-items:center;
@@ -47,7 +34,7 @@ header h1{
   background:white-space;
   border:2px solid white;
   border-radius:30px;
-  color:black;
+  color:#223b92;
   font-weight:600;
   font-size:16px;
   cursor:pointer;
@@ -59,7 +46,7 @@ header h1{
 
 .back-button:hover{
   background:white;
-  color:black;
+  color:#223b92;
   transform:translateX(-5px);
 }
 
@@ -104,8 +91,8 @@ header h1{
   padding:12px 25px;
   border:none;
   border-radius:8px;
-  background:#d46a6a;
-  color:#fff;
+  background:#223b92;
+  color:#4263D3;
   font-weight:600;
   cursor:pointer;
   transition:.3s;
@@ -117,7 +104,7 @@ header h1{
 }
 
 .search-btn:hover{
-  background:#b64f4f;
+  background:#223b92;
 }
 
 .search-btn img{
@@ -481,9 +468,9 @@ nav button{
         <img src="${museum.img}" alt="${museum.name}">
         <div class="info">
           <h3>${museum.name}</h3>
-          <div class="location">📍 ${museum.city}</div>
+          <div class="location"> ${museum.city}</div>
           <span class="category">${museum.category}</span>
-          <button onclick="bookMuseum('${museum.name}', '${museum.city}', '${museum.category}', '${museum.img}')">BOOK NOW</button>
+          <button onclick="bookMuseum('${museum.name}', '${museum.city}', '${museum.category}', '${museum.img}')" >BOOK NOW</button>
         </div>
       `;
       resultsGrid.appendChild(card);
@@ -496,7 +483,7 @@ nav button{
     localStorage.setItem("bookingDetails", JSON.stringify({
       name, city, category, img
     }));
-    alert(`Booking: ${name}\nCity: ${city}\nCategory: ${category}\n\nBooking page coming soon!`);
+   window.location.href=onclick= "booking_details.html"
   }
 
   document.addEventListener('click', (e) => {

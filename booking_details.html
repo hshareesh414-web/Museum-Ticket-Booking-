@@ -19,18 +19,18 @@ body {
 }
 
 header {
-  background: #222;
-  padding: 20px 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: #1d0c5d;
+  box-shadow:0 4px 12px rgba(62,17,228,0.35);
+  padding:30px 10px;
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 20px;
 }
 
 .back-btn {
   background: #fff;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 18px;
@@ -57,6 +57,7 @@ header h1 {
   color: #fff;
   font-size: 28px;
   letter-spacing: 1px;
+  align-items:center;
 }
 
 .container {
@@ -489,14 +490,15 @@ header h1 {
 <body>
 
 <header>
-  <button class="back-btn" onclick="window.location.href='index.html'"></button>
-  <h1>Museum Ticket Booking</h1>
+  
+  <h1  style="text-align:center;">Museum Ticket Booking</h1>
 </header>
 
 
 <div class="nav-buttons">
+<button class="back-btn" onclick="window.location.href='index.html'"></button>
   <a href="index.html" class="nav-btn"> Home</a>
-  <a href="#" class="nav-btn"> Offers</a>
+  <a href ="offers.html" class="nav-btn"> Offers</a>
   <a href="#" class="nav-btn"> Exhibition</a>
   <a href="#" class="nav-btn"> Profile</a>
   <button class="search-btn" onclick="window.location.href='search.html'">
